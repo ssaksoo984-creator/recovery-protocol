@@ -20,7 +20,7 @@
   --mono:'IBM Plex Mono',ui-monospace,monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%;height:100svh;background:#000;overflow:hidden;
+html,body{height:100%;height:100svh;height:100dvh;background:#000;overflow:hidden;
   font-family:var(--sans);-webkit-font-smoothing:antialiased;
   -webkit-tap-highlight-color:transparent}
 body{display:flex;align-items:center;justify-content:center}
@@ -28,11 +28,14 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 
 /* ---------- stage : 모든 좌표의 기준 ----------
    모바일은 주소창이 보였다 숨었다 하면서 100vh가 실제 화면보다 커짐 → 상단이 화면 밖으로 밀림.
-   svh(주소창이 항상 떠 있다고 가정하는 가장 작은 값)를 폴백으로 얹어서 항상 화면 안에 들어오게 함 */
+   svh(주소창이 항상 떠 있다고 가정하는 가장 작은 값)를 우선 폴백으로 깔고,
+   dvh(주소창 상태에 맞춰 실시간으로 바뀌는 값)를 그 위에 얹어서 — 잘리진 않으면서도
+   주소창이 사라지면 화면도 같이 커지게 함 */
 #stage{position:relative;width:100vw;height:56.25vw;
-  max-height:100vh;max-height:100svh;
-  max-width:177.78vh;max-width:177.78svh;
+  max-height:100vh;max-height:100svh;max-height:100dvh;
+  max-width:177.78vh;max-width:177.78svh;max-width:177.78dvh;
   overflow:hidden;background:var(--void);user-select:none}
+#stage:fullscreen{width:100vw;height:56.25vw;max-height:100vh;max-width:177.78vh;margin:auto}
 
 .scene{position:absolute;inset:0;opacity:0;visibility:hidden;
   transition:opacity .9s ease,visibility .9s}
@@ -554,6 +557,7 @@ body.dev .spot{border-color:rgba(255,0,110,.9)!important}
     <div class="tools">
       <button class="tbtn" id="muteBtn" aria-pressed="false"></button>
       <button class="tbtn" id="langBtn">EN</button>
+      <button class="tbtn" id="fsBtn" style="display:none" data-i="fullscreen"></button>
       <button class="tbtn" id="nextBtn" data-i="nextStage"></button>
       <button class="tbtn" id="skipBtn" data-i="skip"></button>
     </div>
@@ -618,6 +622,7 @@ ko:{
  bootCta:'시작하기',
  skip:'건너뛰기',
  nextStage:'다음 단계',
+ fullscreen:'전체화면', exitFullscreen:'전체화면 종료',
  mute:'MUTE', unmute:'UNMUTE',
  rotate:'가로 화면에서 더 잘 보입니다.<br>기기를 돌려주세요.',
  dname:'한 박사 — 생존자 네트워크',
@@ -748,6 +753,7 @@ en:{
  bootCta:'Begin',
  skip:'Skip',
  nextStage:'Next Stage',
+ fullscreen:'Fullscreen', exitFullscreen:'Exit Fullscreen',
  mute:'MUTE', unmute:'UNMUTE',
  rotate:'This works best in landscape.<br>Please rotate your device.',
  dname:'DR. HAN — SURVIVOR NET',
@@ -973,6 +979,7 @@ function applyLang(){
   if (scene === 'office') $('#narr').innerHTML = allFound() ? T.narrFound : T.narrArrive;
   if (viewerKey) openViewer(viewerKey, true);
   applyMute();
+  updateFsBtn();
 }
 
 let scene = 'boot';
@@ -1380,6 +1387,32 @@ PRELOAD.forEach(src=>{
 $('#startBtn').onclick = ()=>{ playSfx('click'); switchBgm(null, 500); go('future'); playExplode(); };
 $('#langBtn').onclick = ()=>{ playSfx('click'); lang = lang === 'ko' ? 'en' : 'ko'; applyLang();
   if (scene === 'future') showLine(); };
+
+/* ---------- 전체화면 ---------- */
+function fsEl(){ return document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement; }
+function requestFS(){
+  const el = $('#stage');
+  const fn = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+  if (fn) fn.call(el);
+}
+function exitFS(){
+  const fn = document.exitFullscreen || document.webkitExitFullscreen || document.mozCancelFullScreen || document.msExitFullscreen;
+  if (fn) fn.call(document);
+}
+function updateFsBtn(){
+  const btn = $('#fsBtn');
+  if (!btn || btn.style.display === 'none') return;
+  btn.textContent = fsEl() ? T.exitFullscreen : T.fullscreen;
+}
+(function initFullscreen(){
+  const el = $('#stage');
+  const supported = !!(el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen || el.msRequestFullscreen);
+  if (!supported) return;
+  $('#fsBtn').style.display = '';
+  $('#fsBtn').onclick = ()=>{ if (fsEl()) exitFS(); else requestFS(); };
+  ['fullscreenchange','webkitfullscreenchange','mozfullscreenchange','MSFullscreenChange']
+    .forEach(ev=> document.addEventListener(ev, updateFsBtn));
+})();
 
 addEventListener('resize', ()=>{ sizeBeam(); sizeCanvas(); });
 addEventListener('keydown', e=>{ if (e.key === 'h' || e.key === 'H') document.body.classList.toggle('dev'); });

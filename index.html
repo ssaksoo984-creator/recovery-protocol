@@ -34,7 +34,8 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 #stage{position:relative;width:100vw;height:56.25vw;
   max-height:100vh;max-height:100svh;max-height:100dvh;
   max-width:177.78vh;max-width:177.78svh;max-width:177.78dvh;
-  overflow:hidden;background:var(--void);user-select:none}
+  overflow:hidden;background:var(--void);user-select:none;
+  container-type:inline-size}   /* 세로로 긴 화면에서 스테이지가 vw보다 좁아질 때(레터박스) cqw로 실제 폭에 맞춤 */
 #stage:fullscreen{width:100vw;height:56.25vw;max-height:100vh;max-width:177.78vh;margin:auto}
 
 .scene{position:absolute;inset:0;opacity:0;visibility:hidden;
@@ -64,6 +65,11 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   padding:.45em .85em;border-radius:2px;transition:.25s;backdrop-filter:blur(3px)}
 .tbtn:hover,.tbtn:focus-visible{color:var(--cyan);border-color:var(--cyan-deep);outline:none}
 .tbtn[aria-pressed="true"]{color:var(--cyan);border-color:var(--cyan-deep)}
+#bottomTools{position:absolute;right:0;bottom:0;z-index:96;
+  display:flex;align-items:center;gap:8px;
+  padding:clamp(12px,1.8vw,26px) clamp(16px,2.4vw,34px)}
+.tbtn.icon{width:2.3em;height:2.3em;padding:0;display:inline-flex;
+  align-items:center;justify-content:center;font-size:clamp(13px,1.3vw,18px);line-height:1}
 
 /* ---------- 공통 버튼 ---------- */
 .cta{font-family:var(--mono);font-size:clamp(11px,1.05vw,15px);letter-spacing:.18em;
@@ -368,41 +374,41 @@ body.dev #computerImg{outline:2px dashed #ffd166}
              linear-gradient(to top,rgba(4,7,13,.96) 0%,rgba(4,7,13,.5) 55%,rgba(4,7,13,.32) 100%)}
 #endGrade.on{opacity:1}
 .endwrap{position:absolute;inset:0;display:grid;place-items:center;z-index:20;
-  text-align:center;padding:0 6vw;opacity:0;transition:opacity 1.3s ease}
+  text-align:center;padding:0 6cqw;opacity:0;transition:opacity 1.3s ease}
 .endwrap.on{opacity:1}
-.endwrap .ok{font-family:var(--mono);font-size:clamp(10px,1vw,14px);letter-spacing:.34em;
+.endwrap .ok{font-family:var(--mono);font-size:clamp(10px,1cqw,14px);letter-spacing:.34em;
   color:var(--cyan);text-transform:uppercase;margin-bottom:1.4em}
-.endwrap h2{font-family:var(--mono);font-weight:600;font-size:clamp(22px,4.2vw,60px);
+.endwrap h2{font-family:var(--mono);font-weight:600;font-size:clamp(22px,4.2cqw,60px);
   letter-spacing:.06em;color:var(--paper);line-height:1.2}
-.endwrap .who{margin-top:1.6em;font-size:clamp(12px,1.3vw,18px);color:var(--fog);
+.endwrap .who{margin-top:1.6em;font-size:clamp(12px,1.3cqw,18px);color:var(--fog);
   line-height:1.9;word-break:keep-all}
 .card{margin-top:2.4em;display:inline-flex;flex-direction:column;gap:1.4em;
-  border:1px solid rgba(79,227,224,.25);padding:clamp(18px,2.4vw,34px) clamp(22px,3.2vw,52px);
+  border:1px solid rgba(79,227,224,.25);padding:clamp(18px,2.4cqw,34px) clamp(22px,3.2cqw,52px);
   background:rgba(8,16,26,.6);backdrop-filter:blur(6px)}
-.card .nm{font-family:var(--mono);font-size:clamp(16px,2.2vw,32px);letter-spacing:.1em;
+.card .nm{font-family:var(--mono);font-size:clamp(16px,2.2cqw,32px);letter-spacing:.1em;
   color:var(--paper)}
-.card .rl{font-family:var(--mono);font-size:clamp(9px,.85vw,13px);letter-spacing:.2em;
+.card .rl{font-family:var(--mono);font-size:clamp(9px,.85cqw,13px);letter-spacing:.2em;
   color:var(--cyan-deep);text-transform:uppercase;margin-top:-1em}
 .card .row{display:flex;gap:.7em;flex-wrap:wrap;justify-content:center}
-.mini{font-family:var(--mono);font-size:clamp(9px,.88vw,13px);letter-spacing:.14em;
+.mini{font-family:var(--mono);font-size:clamp(9px,.88cqw,13px);letter-spacing:.14em;
   text-transform:uppercase;color:var(--cyan);text-decoration:none;
   border:1px solid var(--cyan-deep);padding:.75em 1.5em;transition:.25s}
 .mini:hover{background:rgba(79,227,224,.14)}
-.replay{margin-top:2em;font-family:var(--mono);font-size:clamp(9px,.85vw,13px);
+.replay{margin-top:2em;font-family:var(--mono);font-size:clamp(9px,.85cqw,13px);
   letter-spacing:.16em;color:var(--fog-dim);text-transform:uppercase;transition:.25s}
 .replay:hover{color:var(--cyan)}
-.credits-btn{position:absolute;left:50%;bottom:clamp(14px,2vw,24px);transform:translateX(-50%);
+.credits-btn{position:absolute;left:clamp(14px,2cqw,24px);bottom:clamp(14px,2cqw,24px);
   z-index:30;font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;
   color:var(--fog-dim);border:1px solid rgba(143,163,184,.25);padding:.55em 1.2em;border-radius:2px;
   opacity:0;visibility:hidden;transition:.6s;backdrop-filter:blur(4px)}
 .credits-btn.on{opacity:1;visibility:visible}
 .credits-btn:hover{color:var(--cyan);border-color:var(--cyan-deep)}
-.credits{position:absolute;left:50%;bottom:clamp(52px,6.5vw,68px);transform:translateX(-50%) translateY(6px);
-  z-index:31;width:min(88%,480px);text-align:center;font-family:var(--mono);font-size:8.5px;
+.credits{position:absolute;left:clamp(14px,2cqw,24px);bottom:clamp(52px,6.5cqw,68px);transform:translateY(6px);
+  z-index:31;width:min(80cqw,420px);text-align:left;font-family:var(--mono);font-size:8.5px;
   letter-spacing:.03em;color:var(--fog-dim);line-height:1.8;background:rgba(6,12,20,.9);
   border:1px solid rgba(143,163,184,.2);border-radius:2px;padding:1em 1.2em;backdrop-filter:blur(6px);
   opacity:0;visibility:hidden;transition:.3s}
-.credits.on{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.credits.on{opacity:1;visibility:visible;transform:translateY(0)}
 .credits p{margin:0}
 
 /* ---------- rotate / dev ---------- */
@@ -556,11 +562,13 @@ body.dev .spot{border-color:rgba(255,0,110,.9)!important}
     <span class="tag" id="chapter">CH.00 — STANDBY</span>
     <div class="tools">
       <button class="tbtn" id="muteBtn" aria-pressed="false"></button>
-      <button class="tbtn" id="langBtn">EN</button>
-      <button class="tbtn" id="fsBtn" style="display:none" data-i="fullscreen"></button>
       <button class="tbtn" id="nextBtn" data-i="nextStage"></button>
       <button class="tbtn" id="skipBtn" data-i="skip"></button>
     </div>
+  </div>
+  <div id="bottomTools">
+    <button class="tbtn icon" id="fsBtn" style="display:none"></button>
+    <button class="tbtn" id="langBtn">EN</button>
   </div>
 </div>
 
@@ -1404,7 +1412,11 @@ function exitFS(){
 function updateFsBtn(){
   const btn = $('#fsBtn');
   if (!btn || btn.style.display === 'none') return;
-  btn.textContent = fsEl() ? T.exitFullscreen : T.fullscreen;
+  const active = !!fsEl();
+  btn.textContent = '⛶';   // 아이콘 하나 고정, 상태는 색으로만 표시
+  btn.setAttribute('aria-pressed', String(active));
+  const label = active ? T.exitFullscreen : T.fullscreen;
+  btn.title = label; btn.setAttribute('aria-label', label);
 }
 (function initFullscreen(){
   const el = $('#stage');

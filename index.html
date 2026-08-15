@@ -20,14 +20,18 @@
   --mono:'IBM Plex Mono',ui-monospace,monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%;background:#000;overflow:hidden;
+html,body{height:100%;height:100svh;background:#000;overflow:hidden;
   font-family:var(--sans);-webkit-font-smoothing:antialiased;
   -webkit-tap-highlight-color:transparent}
 body{display:flex;align-items:center;justify-content:center}
 button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
 
-/* ---------- stage : 모든 좌표의 기준 ---------- */
-#stage{position:relative;width:100vw;height:56.25vw;max-height:100vh;max-width:177.78vh;
+/* ---------- stage : 모든 좌표의 기준 ----------
+   모바일은 주소창이 보였다 숨었다 하면서 100vh가 실제 화면보다 커짐 → 상단이 화면 밖으로 밀림.
+   svh(주소창이 항상 떠 있다고 가정하는 가장 작은 값)를 폴백으로 얹어서 항상 화면 안에 들어오게 함 */
+#stage{position:relative;width:100vw;height:56.25vw;
+  max-height:100vh;max-height:100svh;
+  max-width:177.78vh;max-width:177.78svh;
   overflow:hidden;background:var(--void);user-select:none}
 
 .scene{position:absolute;inset:0;opacity:0;visibility:hidden;

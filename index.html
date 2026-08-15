@@ -1384,7 +1384,7 @@ PRELOAD.forEach(src=>{
   probe.src = C.src;
 })();
 
-$('#startBtn').onclick = ()=>{ playSfx('click'); switchBgm(null, 500); go('future'); playExplode(); };
+$('#startBtn').onclick = ()=>{ requestFS(); playSfx('click'); switchBgm(null, 500); go('future'); playExplode(); };
 $('#langBtn').onclick = ()=>{ playSfx('click'); lang = lang === 'ko' ? 'en' : 'ko'; applyLang();
   if (scene === 'future') showLine(); };
 

@@ -70,6 +70,14 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   padding:clamp(12px,1.8vw,26px) clamp(16px,2.4vw,34px)}
 .tbtn.icon{width:2.3em;height:2.3em;padding:0;display:inline-flex;
   align-items:center;justify-content:center;font-size:clamp(13px,1.3vw,18px);line-height:1}
+.menuWrap{position:relative}
+.menuPanel{position:absolute;top:calc(100% + 8px);right:0;z-index:97;
+  display:flex;flex-direction:column;gap:6px;min-width:9em;
+  background:rgba(6,12,20,.94);border:1px solid rgba(143,163,184,.22);border-radius:4px;
+  padding:8px;backdrop-filter:blur(6px);
+  opacity:0;visibility:hidden;transform:translateY(-6px);transition:.2s}
+.menuPanel.on{opacity:1;visibility:visible;transform:translateY(0)}
+.menuPanel .tbtn{text-align:left}
 
 /* ---------- 공통 버튼 ---------- */
 .cta{font-family:var(--mono);font-size:clamp(11px,1.05vw,15px);letter-spacing:.18em;
@@ -564,14 +572,20 @@ body.dev .spot{border-color:rgba(255,0,110,.9)!important}
   <div id="topbar">
     <span class="tag" id="chapter">CH.00 — STANDBY</span>
     <div class="tools">
-      <button class="tbtn" id="muteBtn" aria-pressed="false"></button>
+      <button class="tbtn" id="prevBtn" data-i="prevStage"></button>
       <button class="tbtn" id="nextBtn" data-i="nextStage"></button>
       <button class="tbtn" id="skipBtn" data-i="skip"></button>
+      <div class="menuWrap">
+        <button class="tbtn icon" id="menuBtn" aria-haspopup="true" aria-expanded="false" aria-pressed="false">☰</button>
+        <div class="menuPanel" id="menuPanel">
+          <button class="tbtn" id="muteBtn" aria-pressed="false"></button>
+          <button class="tbtn" id="langBtn">EN</button>
+        </div>
+      </div>
     </div>
   </div>
   <div id="bottomTools">
     <button class="tbtn icon" id="fsBtn" style="display:none"></button>
-    <button class="tbtn" id="langBtn">EN</button>
   </div>
 </div>
 
@@ -612,7 +626,7 @@ const CONFIG = {
     error      : 'assets/audio/- Storytelling Cartoon Boing 06.mp3',      // 암호 오답
     complete   : 'assets/audio/- Storytelling Cartoon MusicComedy 14.mp3' // 최종 정답 성공(복구 영상 끝난 뒤)
   },
-  answers: { cover:'01', resume:'08', portfolio:'code' }
+  answers: { cover:'01', resume:'07', portfolio:'code' }
 };
 
 /* ============================================================
@@ -625,6 +639,7 @@ ko:{
  bootMeta:'소요 시간 약 3분 · 사운드 켜기를 권장합니다',
  bootCta:'시작하기',
  skip:'건너뛰기',
+ prevStage:'이전 단계',
  nextStage:'다음 단계',
  fullscreen:'전체화면', exitFullscreen:'전체화면 종료',
  mute:'MUTE', unmute:'UNMUTE',
@@ -648,7 +663,7 @@ ko:{
  run:'실행', hint:'힌트 보기',
  msgErr:'코드 불일치 — 재시도',
  msgOk:'인증 완료. 복구 시퀀스 시작.',
- msgHint:'페이지 번호 / 생일의 달 / 로고 첫 단어',
+ msgHint:'페이지 번호 / 경력 연차 / 로고 첫 단어',
  endOk:'MISSION COMPLETE',
  endTitle:'지구가 복구되었습니다',
  endWho:'감염된 AI는 정지됐고 도시는 다시 불을 켰습니다.<br>그런데 이 코드를 남긴 사람이 누구인지, 궁금하지 않나요?',
@@ -756,6 +771,7 @@ en:{
  bootMeta:'About 3 minutes · best with sound on',
  bootCta:'Begin',
  skip:'Skip',
+ prevStage:'Previous Stage',
  nextStage:'Next Stage',
  fullscreen:'Fullscreen', exitFullscreen:'Exit Fullscreen',
  mute:'MUTE', unmute:'UNMUTE',
@@ -779,7 +795,7 @@ en:{
  run:'Run', hint:'Show hint',
  msgErr:'Code mismatch — retry',
  msgOk:'Verified. Starting recovery sequence.',
- msgHint:'Page number / birth month / first word of the logo',
+ msgHint:'Page number / years of experience / first word of the logo',
  endOk:'MISSION COMPLETE',
  endTitle:'Earth has been restored',
  endWho:'The infected AI is halted and the cities are lit again.<br>But aren\'t you curious who left that code behind?',
@@ -1335,6 +1351,27 @@ $('#skipBtn').onclick = ()=>{
   $('#viewer').classList.remove('on');
   showEnding();
 };
+/* 바로 이전 씬으로 되돌아가기 — 특히 암호실에서 사무실 단서를 다시 보러 갈 때 유용 */
+$('#prevBtn').onclick = ()=>{
+  $('#viewer').classList.remove('on'); viewerKey = null;
+  if (scene === 'future'){
+    const v = $('#explodeVid');
+    v.pause(); v.style.display = 'none'; v.onended = null; v.onerror = null;
+    clearInterval(typing); typing = null;
+    switchBgm('bgmIntro', 800);
+    go('boot');
+  } else if (scene === 'office'){
+    switchBgm('bgmFuture', 800);
+    di = 0; go('future'); showLine();
+  } else if (scene === 'terminal'){
+    [0,1,2].forEach(i=>{ $('#in'+i).value = ''; $('#in'+i).disabled = false; });
+    $('#scrMsg').textContent = ''; $('#hintBtn').classList.remove('on'); fails = 0;
+    $('#deviceLayer').classList.remove('off');
+    switchBgm('bgmOffice', 800);
+    go('office'); sizeBeam();
+  }
+  // 'boot' / 'portal' / 'ending' 에서는 돌아갈 이전 단계가 따로 없어 아무 동작 없음
+};
 /* 건너뛰기(엔딩으로 즉시 이동)와 별개 — 지금 씬만 끝내고 바로 다음 씬으로 */
 $('#nextBtn').onclick = ()=>{
   $('#viewer').classList.remove('on'); viewerKey = null;
@@ -1404,6 +1441,21 @@ function updateFsBtn(){
   ['fullscreenchange','webkitfullscreenchange','mozfullscreenchange','MSFullscreenChange']
     .forEach(ev=> document.addEventListener(ev, updateFsBtn));
 })();
+
+/* ---------- 상단 메뉴(음소거/언어) ---------- */
+$('#menuBtn').onclick = (e)=>{
+  e.stopPropagation();
+  const open = $('#menuPanel').classList.toggle('on');
+  $('#menuBtn').setAttribute('aria-expanded', String(open));
+  $('#menuBtn').setAttribute('aria-pressed', String(open));
+};
+document.addEventListener('click', e=>{
+  if ($('#menuPanel').classList.contains('on') && !e.target.closest('.menuWrap')){
+    $('#menuPanel').classList.remove('on');
+    $('#menuBtn').setAttribute('aria-expanded', 'false');
+    $('#menuBtn').setAttribute('aria-pressed', 'false');
+  }
+});
 
 addEventListener('resize', ()=>{ sizeBeam(); sizeCanvas(); });
 addEventListener('keydown', e=>{ if (e.key === 'h' || e.key === 'H') document.body.classList.toggle('dev'); });

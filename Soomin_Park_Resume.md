@@ -1,76 +1,51 @@
 # SOOMIN PARK
-**Web Designer & Front-End Developer**
+**UI/UX Designer**
 
-Burnaby, BC · Permanent Resident · ssaksoo984@gmail.com
-[codedesk-studio.online](https://www.codedesk-studio.online) · linkedin.com/in/soomin-park-codedesk
+Burnaby, BC  ·  Permanent Resident  ·  ssssssu984@gmail.com
+codedesk-studio.online  ·  linkedin.com/in/soomin-park-codedesk  ·  Korean (native) / English (professional working)
 
 ---
 
 ## SUMMARY
 
-Web designer and front-end developer with 7 years of experience across public-sector, commerce,
-and small-business projects in Korea and Canada. Every design decision needs a reason: usability
-before decoration. That means clarifying what a client actually needs, structuring the site so they
-can maintain it themselves, and giving visitors a reason to stay. Led a four-person design team in
-Seoul; now design and ship client sites in Vancouver. Available immediately for full-time roles.
+UI/UX designer with 7 years of experience across public-sector, commerce, and small-business projects in Korea and Canada. I work on information architecture, user flows, and interface design — how features should be grouped, where they belong on screen, and in what order users meet them. Strongest with dense, complex systems: university admin platforms, government document databases, commerce renewals. Also experienced in proposal and marketing design. Led a four-person team in Seoul; available immediately.
 
 ---
 
 ## EXPERIENCE
 
-### Freelance Web Designer & Developer | Jan 2023 – Mar 2026
-*Independent Contractor, Vancouver, BC — assignments via Comma Marketing Agency (Vancouver) and Landsoft (Seoul)*
+### Freelance UI/UX Designer | 2023 – 2026
+*Via Komma Marketing Agency — Vancouver, BC*
 
-- Worked as a freelance contractor for two agencies over three years, shipping **20+ sites** across
-  wellness, hospitality, retail, and public-sector clients. Owned UI, content architecture, and
-  deployment on each build.
-- **Via Comma Marketing Agency** — Regen Pilates & Sleek Silhouettes: condensed sprawling program lists
-  into needs-based categories and structured the sites so owners could update programs themselves.
-  Jeon Restaurant: defined a colour and type direction for traditional Korean fine dining and rebuilt
-  the menu as live text for SEO.
-- **Via Landsoft** — Designed how to present a large emerging- and mid-career artist archive (K-Art
-  Market) at a glance, and built the admin console for it and for Kangwon Land's operator-facing pages.
-- Built with Next.js, TypeScript, GSAP, Shopify, and WordPress, deployed on Vercel. Case studies at
-  codedesk-studio.online.
+- **Regen Pilates & Sleek Silhouettes** — Two wellness studios with sprawling program and service lists. Reorganized each offering into needs-based categories so visitors reach the right program quickly, established a coherent tone and manner where none existed, and structured the sites so owners could maintain them without a developer.
+- **Jeon Restaurant** — Defined brand colour and type direction for traditional Korean fine dining, and rebuilt the menu — the site's highest-traffic page — as live text rather than flat images so it could be indexed and reused across the site.
+- Owned requirements, information architecture, user flows, and UI design on each build. Delivered on WordPress, Shopify, and Next.js, prototyping interactions before handoff.
 
-### Web Designer & Design Team Lead | Oct 2020 – Dec 2022
+### UI/UX Design Team Lead (2020–2022) → Freelance Designer (2023–2026) | 2020 – 2026
 *Landsoft — Seoul, Korea*
 
-- Led a team of four designers and publishers delivering 4–5 public-sector web projects per year, from
-  proposal stage through launch, and contributed visual strategy to competitive bids.
-- **National Folk Museum of Korea — site renewal:** set the design concept for the institution's new
-  brand identity, restructured a fragmented menu system, and delivered responsive desktop and mobile UI.
-- **MU:DS online goods shop (National Museum Foundation):** owned design planning and UI for the
-  commerce renewal, reworking main and product-detail pages to improve discoverability during a period
-  of sharply increased order volume.
+- Led a team of four through **4–5+ large public-sector and enterprise web projects per year**, from proposal to launch; continued on the same projects as a freelance designer after 2023.
+- **Korea National University of Arts — academic admin system:** redesigned a department-centric system around user intent. Restructured the information architecture for two distinct user groups (students vs. staff), separated read-only fields from editable forms on high-density screens, and established a light/dark design system.
+- **Ministry of Foreign Affairs — treaty search system:** designed the UX for a public records database of 3,000+ treaties. Placed article-level contents directly in search results so users reach a specific clause without leaving the page, and designed a dedicated document viewer with multilingual side-by-side comparison and scan-page controls.
+- **MU:DS (National Museum Foundation) — commerce renewal:** owned UX planning and UI design, relocating features users could not find and reworking main and detail pages to improve discoverability during a period of sharply increased order volume.
+- **National Museum of Korea — site renewal proposal:** benchmarked six leading museum sites, then restructured a fragmented global navigation bar around visitor intent. Surfaced hours, admission, and booking above the fold, with a card-based layout letting exhibition posters carry the visual weight.
 
-### Designer | May 2019 – Feb 2020
+### UI/UX & Marketing Designer | 2019.05 – 2020.02
 *Red Rocket (Campus Fund) — Seoul, Korea*
 
-- Designed and wrote campaign pages for a P2P investment startup (1% cashback, referral program),
-  translating unfamiliar financial mechanics into language first-time investors could follow. Reviewed
-  incoming customer-service tickets and fed recurring points of confusion back into the interface.
-- **Scooter Holic:** planned and designed an installment-based scooter rental commerce site end to
-  end — vendor category system, product detail pages, and campaign pages.
+- Designed campaign pages and interfaces for a P2P investment startup, translating unfamiliar financial mechanics into language and layouts first-time investors could follow. Reviewed customer-service tickets to identify recurring confusion and fed those findings back into the interface.
+- **Scooter Holic:** planned and designed an installment-based rental commerce site end to end — vendor categories, product detail pages, campaign pages.
 
-### Designer & Marketer | May 2018 – Dec 2018
+### Visual & Marketing Designer | 2018.05 – 2018.12
 *KstarAD — Seoul, Korea*
 
-- Produced promotional and event design across in-house and client campaigns — a cryptocurrency launch,
-  K-pop event promotions, and on-site exhibition booth signage and wayfinding — alongside social content
-  for Food & Company (Instagram, Facebook): topic selection, headline and subhead copy, image editing.
-  Designed and maintained the company blog.
-
-### Freelance Designer | Mar 2017 – Sep 2017
-*World Luxury Store — Seoul, Korea & Chengdu, China*
-
-- Designed and maintained pages for a Korea–China luxury e-commerce storefront.
+- Produced promotional and event design across in-house and client campaigns — a cryptocurrency launch, K-pop event promotions, booth signage — alongside social content, presentation decks, and the company blog.
 
 ---
 
 ## SKILLS
 
-**Design** — Figma, Photoshop, Illustrator, responsive UI, design systems, brand direction
-**Build** — HTML, CSS, JavaScript, TypeScript, React, Next.js, GSAP, Shopify, WordPress, Wix
-**Platforms & workflow** — Vercel, Supabase, Git, AI-assisted development (Claude Code), SEO, Premiere Pro
-**Languages** — Korean (native), English (professional working proficiency)
+**UI/UX** — Information architecture, user flows, wireframing, complex data systems, responsive design, design systems  
+**Visual** — Brand direction, presentation & proposal design, marketing assets  
+**Tools** — Figma, Photoshop, Illustrator, WordPress, Shopify  
+**Technical** — AI-assisted prototyping (Claude Code, VS Code, Codex)  ·  HTML/CSS/JS/React structure for developer handoff  

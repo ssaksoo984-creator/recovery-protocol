@@ -70,6 +70,20 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
   padding:clamp(12px,1.8vw,26px) clamp(16px,2.4vw,34px)}
 .tbtn.icon{width:2.3em;height:2.3em;padding:0;display:inline-flex;
   align-items:center;justify-content:center;font-size:clamp(13px,1.3vw,18px);line-height:1}
+
+/* ---------- 언어 선택 게이트 : 게임 진입 전 딱 한 번 ---------- */
+#langGate{position:absolute;inset:0;z-index:98;display:grid;place-items:center;
+  background:var(--void);transition:opacity .5s ease,visibility .5s}
+#langGate.off{opacity:0;visibility:hidden;pointer-events:none}
+.lgInner{text-align:center;padding:0 6vw}
+.lgQ{font-family:var(--mono);font-size:clamp(11px,1.1vw,15px);letter-spacing:.1em;
+  color:var(--fog);margin-bottom:1.8em}
+.lgRow{display:flex;gap:1em;justify-content:center;flex-wrap:wrap}
+.lgBtn{font-family:var(--mono);font-size:clamp(13px,1.3vw,18px);letter-spacing:.12em;
+  color:var(--cyan);border:1px solid var(--cyan-deep);background:rgba(8,20,28,.5);
+  padding:.9em 2.2em;border-radius:2px;transition:.25s;backdrop-filter:blur(4px)}
+.lgBtn:hover,.lgBtn:focus-visible{background:rgba(79,227,224,.12);
+  box-shadow:0 0 26px rgba(79,227,224,.22);outline:none}
 .menuWrap{position:relative}
 .menuPanel{position:absolute;top:calc(100% + 8px);right:0;z-index:97;
   display:flex;flex-direction:column;gap:6px;min-width:9em;
@@ -586,6 +600,15 @@ body.dev .spot{border-color:rgba(255,0,110,.9)!important}
   </div>
   <div id="bottomTools">
     <button class="tbtn icon" id="fsBtn" style="display:none"></button>
+  </div>
+  <div id="langGate">
+    <div class="lgInner">
+      <p class="lgQ">언어를 선택해주세요 · Choose your language</p>
+      <div class="lgRow">
+        <button class="lgBtn" id="lgKo">한국어</button>
+        <button class="lgBtn" id="lgEn">English</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1449,6 +1472,10 @@ document.addEventListener('click', e=>{
     $('#menuBtn').setAttribute('aria-pressed', 'false');
   }
 });
+
+/* 게임 진입 전 언어 선택 — 한 번 고르면 게이트가 사라지고 그 언어로 부팅 화면이 보임 */
+$('#lgKo').onclick = ()=>{ lang = 'ko'; applyLang(); $('#langGate').classList.add('off'); };
+$('#lgEn').onclick = ()=>{ lang = 'en'; applyLang(); $('#langGate').classList.add('off'); };
 
 addEventListener('resize', ()=>{ sizeBeam(); sizeCanvas(); });
 addEventListener('keydown', e=>{ if (e.key === 'h' || e.key === 'H') document.body.classList.toggle('dev'); });
